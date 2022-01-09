@@ -22,15 +22,14 @@ EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app.jar"]
 ```
 
+This Dockerfile is very simple, but it is all you need to run a Spring Boot app: just Java and a JAR file.
 The `docker build` command builds Docker images from a Dockerfile and a "context":
 
 ```bash
 docker build -t spring-docker .
 ```
 
-This Dockerfile is very simple, but it is all you need to run a Spring Boot app with no frills: just Java and a JAR file.
-After running the last command, you can run a container from the Docker image.
-Here is the command:
+After running the last command, you can run a container from the Docker image:
 
 ```bash
 docker run -d -p 8080:8080 spring-docker
@@ -38,10 +37,10 @@ docker run -d -p 8080:8080 spring-docker
 
 Here, `-d` means detach mode, and `-p 8080:8080` means external port is 8080 is mapped with internal port 8080.
 
-You can build a tagged docker image with Gradle using `./gradlew buildDockerImage` command.
+Alternatively, you can build a tagged docker image with Gradle using `./gradlew buildDockerImage` task.
 
 Spring Boot supports buildpacks.
-Put simply, instead of creating our own Dockerfile and building it using something like docker build, all you need is the `./gradlew bootBuildImage` command.
+Put simply, instead of creating our own Dockerfile and building it using something like docker build, all you need is the `./gradlew bootBuildImage` task.
 Alternatively, the [Palantir Gradle Plugin](https://github.com/palantir/gradle-docker) works with a Dockerfile and can also generate a Dockerfile for you.
 Using [Google Jib](https://github.com/GoogleContainerTools/jib) makes preparing and pushing Docker image pretty easy.
 Jib builds optimized Docker and OCI images for your Java applications without a Docker daemon, and without deep mastery of Docker best practices.
